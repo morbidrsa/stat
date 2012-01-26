@@ -18,4 +18,4 @@ struct data {
  *
  * @return true on success, false on failure
  */
-bool get_data_from_file(char *filename, struct **data);
+bool get_data_from_file(char *filename, struct data **data);

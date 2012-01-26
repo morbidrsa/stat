@@ -1,12 +1,16 @@
 /* Copyright (c) 2012, Johannes Thumshirn */
 /* See COPYING for Licence details */
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+
 #include <string.h>
 #include <errno.h>
 
 #include "csv.h"
 
-bool get_data_from_file(char *fname, struct *data)
+bool get_data_from_file(char *fname, struct data **data)
 {
 	FILE *f;
 	char tmp[256];
@@ -44,10 +48,10 @@ bool get_data_from_file(char *fname, struct *data)
 			while (tt != NULL) {
 				switch (col_cnt) {
 				case 0:
-					*data[row_cnt].when = atoi(tt);
+					data[row_cnt]->when = atoi(tt);
 					break;
 				case 1:
-					*data[row_cnt].ammount = atoi(tt);
+					data[row_cnt]->ammount = atoi(tt);
 					break;
 				}
 				col_cnt++;
