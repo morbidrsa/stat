@@ -1,0 +1,4 @@
+dnl Copyright (c) 2012, Johannes Thumshirn
+
+AC_INIT
+AM_INIT_AUTOMAKE(stat, 0.1-alpha-dev)
