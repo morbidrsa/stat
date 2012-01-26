@@ -15,3 +15,5 @@ AC_CONFIG_FILES([
 	src/stat/Makefile
 	src/test/Makefile
 ])
+
+AC_OUTPUT
