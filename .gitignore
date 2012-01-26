@@ -11,6 +11,9 @@
 /config.guess
 /depcomp
 /install-sh
+/autom4te.cache
+/config.h.in
+/missing
 
 #/src/csv
 /src/csv/Makefile
