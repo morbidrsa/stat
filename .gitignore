@@ -16,6 +16,10 @@
 /autom4te.cache
 /config.h.in
 /missing
+/autoscan.log
+/stamp-h1
+/config.h
+/configure.scan
 
 #/src
 /src/Makefile
