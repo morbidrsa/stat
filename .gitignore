@@ -1,3 +1,5 @@
+#Editor stuff
+*~
 #Autotools stuff
 .deps
 /Makefile
@@ -14,6 +16,10 @@
 /autom4te.cache
 /config.h.in
 /missing
+
+#/src
+/src/Makefile
+/src/Makefile.in
 
 #/src/csv
 /src/csv/Makefile
