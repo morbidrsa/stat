@@ -2,3 +2,16 @@ dnl Copyright (c) 2012, Johannes Thumshirn
 
 AC_INIT
 AM_INIT_AUTOMAKE(stat, 0.1-alpha-dev)
+AM_CONFIG_HEADER(config.h)
+
+AC_PROG_CC
+AC_PROG_RANLIB
+
+AC_CONFIG_FILES([
+	Makefile
+	src/Makefile
+	src/csv/Makefile
+	src/ui/Makefile
+	src/stat/Makefile
+	src/test/Makefile
+])
