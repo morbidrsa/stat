@@ -18,6 +18,7 @@ AC_PROG_RANLIB
 
 AC_CONFIG_FILES([
 	Makefile
+	doc/Makefile
 	src/Makefile
 	src/csv/Makefile
 	src/ui/Makefile
