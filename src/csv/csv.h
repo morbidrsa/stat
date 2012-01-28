@@ -14,8 +14,9 @@ struct data {
  * Read in CSV formated file and fill a data struct array
  *
  * @param filename 	the filename to read from
- * @param data		pointer to data structure array the data is stored in
+ * @param ret		pointer to data structure array the data is stored in
+ * @param retcnt	Number of elements in ret data structure array
  *
  * @return true on success, false on failure
  */
-bool get_data_from_file(char *filename, struct data **data);
+bool get_data_from_file(char *filename, struct data **ret, int *retcnt);

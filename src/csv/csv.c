@@ -10,7 +10,7 @@
 
 #include "csv.h"
 
-bool get_data_from_file(char *fname, struct data **data)
+bool get_data_from_file(char *fname, struct data **ret, int *retcnt)
 {
 	FILE *f;
 	char tmp[256];
@@ -31,27 +31,27 @@ bool get_data_from_file(char *fname, struct data **data)
 	}
 
 	/* Allocate memory for 1st row */
-	*data = malloc(sizeof(struct data));
-	if (*data == NULL)
+	*ret = malloc(sizeof(struct data));
+	if (*ret == NULL)
 		goto error;
 		
 	while (!feof(f)) {
 		if (fgets(tmp, sizeof(tmp) - 1, f)) {
 			tt = strtok(tmp, ",");
 			if (row_cnt > 0) {
-				*data = realloc(data,
+				*ret = realloc(ret,
 						sizeof(struct data) *
 						(row_cnt + 1));
-				if (*data == NULL)
+				if (*ret == NULL)
 					goto error;
 			}
 			while (tt != NULL) {
 				switch (col_cnt) {
 				case 0:
-					data[row_cnt]->when = atoi(tt);
+					ret[row_cnt]->when = atoi(tt);
 					break;
 				case 1:
-					data[row_cnt]->ammount = atoi(tt);
+					ret[row_cnt]->ammount = atoi(tt);
 					break;
 				}
 				col_cnt++;
