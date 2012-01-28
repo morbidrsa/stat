@@ -1,5 +1,12 @@
 #Editor stuff
 *~
+
+#C Stuff
+*.o
+
+#Libraries
+*.a
+
 #Autotools stuff
 .deps
 /Makefile
