@@ -17,6 +17,8 @@ bool get_data_from_file(char *fname, struct data **ret, int *retcnt)
 	char *tt;
 	int col_cnt;
 	int row_cnt;
+	struct data *data;
+	const char *delim = ",";
 	
 	/* Initialize variables */
 	row_cnt = 0;
@@ -31,31 +33,31 @@ bool get_data_from_file(char *fname, struct data **ret, int *retcnt)
 	}
 
 	/* Allocate memory for 1st row */
-	*ret = malloc(sizeof(struct data));
-	if (*ret == NULL)
+	data = malloc(sizeof(struct data));
+	if (data == NULL)
 		goto error;
 		
 	while (!feof(f)) {
-		if (fgets(tmp, sizeof(tmp) - 1, f)) {
-			tt = strtok(tmp, ",");
+		if (fgets(tmp, sizeof(tmp) - 1, f) != NULL) {
+			tt = strtok(tmp, delim);
 			if (row_cnt > 0) {
-				*ret = realloc(ret,
+				data = realloc(data,
 						sizeof(struct data) *
 						(row_cnt + 1));
-				if (*ret == NULL)
+				if (data == NULL)
 					goto error;
 			}
 			while (tt != NULL) {
 				switch (col_cnt) {
 				case 0:
-					ret[row_cnt]->when = atoi(tt);
+					data[row_cnt].when = atoi(tt);
 					break;
 				case 1:
-					ret[row_cnt]->ammount = atoi(tt);
+					data[row_cnt].ammount = atoi(tt);
 					break;
 				}
 				col_cnt++;
-				tt = strtok(NULL, ",");
+				tt = strtok(NULL, delim);
 			}
 			row_cnt++;
 			col_cnt = 0;
@@ -64,6 +66,8 @@ bool get_data_from_file(char *fname, struct data **ret, int *retcnt)
 
 	fclose(f);
 
+	*ret = data;
+	*retcnt = row_cnt;
 	return true;
 	
 error:
