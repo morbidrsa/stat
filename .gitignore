@@ -18,6 +18,7 @@
 /config.log
 /config.status
 /config.guess
+/config.sub
 /depcomp
 /install-sh
 /autom4te.cache
@@ -30,6 +31,7 @@
 
 #/doc
 /doc/Makefile.in
+/doc/Makefile
 
 #/src
 /src/Makefile
@@ -42,10 +44,12 @@
 #/src/stat
 /src/stat/Makefile
 /src/stat/Makefile.in
+/src/stat/stat
 
 #/src/test
 /src/test/Makefile
 /src/test/Makefile.in
+/src/test/test
 
 #/src/ui
 /src/ui/Makefile
