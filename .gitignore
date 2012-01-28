@@ -21,6 +21,9 @@
 /config.h
 /configure.scan
 
+#/doc
+/doc/Makefile.in
+
 #/src
 /src/Makefile
 /src/Makefile.in
