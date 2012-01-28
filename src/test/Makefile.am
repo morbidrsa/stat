@@ -2,6 +2,8 @@ TESTS = test
 
 noinst_PROGRAMS = test
 
+AM_CPPFLAGS = -I"$(top_srcdir)/src/csv"
+
 test_SOURCES = 			\
 	test.c 			\
 	tinytest.c
