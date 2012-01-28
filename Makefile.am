@@ -1,5 +1,7 @@
 # Copyright (c) 2012, Johannes Thumshirn
 
+AUTOMAKE_OPTIONS = foreign 1.7
+
 SUBDIRS = src doc
 
 doxygen:
