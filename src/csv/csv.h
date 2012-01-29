@@ -19,4 +19,4 @@ struct data {
  *
  * @return true on success, false on failure
  */
-bool get_data_from_file(char *filename, struct data **ret, int *retcnt);
+bool csv_get_data_from_file(char *filename, struct data **ret, int *retcnt);

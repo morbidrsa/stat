@@ -10,7 +10,7 @@
 
 #include "csv.h"
 
-bool get_data_from_file(char *fname, struct data **ret, int *retcnt)
+bool csv_get_data_from_file(char *fname, struct data **ret, int *retcnt)
 {
 	FILE *f;
 	char tmp[256];

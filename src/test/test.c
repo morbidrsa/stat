@@ -33,7 +33,7 @@ static void test_csv(void* data)
 	fclose(f);
 
 	/* Fail if get_data_from_file does not return true */
-	tt_assert(get_data_from_file(filename, &ret, &retcnt) == true);
+	tt_assert(csv_get_data_from_file(filename, &ret, &retcnt) == true);
 	/* Fail if retcnt != 3 */
 	tt_assert(retcnt == 3);
 	/* Fail if one of the elements in ret isn't like we want */
