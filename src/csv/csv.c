@@ -19,7 +19,7 @@ bool csv_get_data_from_file(char *fname, struct data **ret, int *retcnt)
 	int row_cnt;
 	struct data *data;
 	const char *delim = ",";
-	
+
 	/* Initialize variables */
 	row_cnt = 0;
 	col_cnt = 0;
@@ -36,7 +36,7 @@ bool csv_get_data_from_file(char *fname, struct data **ret, int *retcnt)
 	data = malloc(sizeof(struct data));
 	if (data == NULL)
 		goto error;
-		
+
 	while (!feof(f)) {
 		if (fgets(tmp, sizeof(tmp) - 1, f) != NULL) {
 			tt = strtok(tmp, delim);
@@ -69,10 +69,10 @@ bool csv_get_data_from_file(char *fname, struct data **ret, int *retcnt)
 	*ret = data;
 	*retcnt = row_cnt;
 	return true;
-	
+
 error:
 	fclose(f);
 	fprintf(stderr, "Could not allocate memory for data structure: %s\n",
 		strerror(errno));
-	return false;	
+	return false;
 }
