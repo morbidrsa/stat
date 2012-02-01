@@ -44,7 +44,7 @@ static void test_csv(void* data)
 	tt_assert(ret[2].when == 1);
 	tt_assert(ret[2].ammount == 1);
 
-
+	/* remove test.csv after unit testing */
 	unlink(filename);
 end:
 	;
