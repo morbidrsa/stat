@@ -8,6 +8,33 @@ struct data {
 	int ammount;		/** How often did the event occure */
 };
 
+typedef bool (csv_callback) (int, int, void**, int*);
+
+/**
+ * @brief Initialize private csv parser context
+ */
+bool csv_init(void);
+
+/**
+ * @brief Free private csv parser context
+ */
+void csv_free(void);
+
+/**
+ * @brief Register fubction callback
+ *
+ * Register a callback function, which assigns the parsed fields into a
+ * user defined data structure.
+ *
+ * @param cb	Parsing callback function
+ */
+void csv_register_callback(csv_callback *cb);
+
+/**
+ * @brief
+ */
+void csv_unregister_callback(void);
+
 /**
  * @brief Get Data from File
  *

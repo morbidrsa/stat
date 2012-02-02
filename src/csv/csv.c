@@ -10,6 +10,46 @@
 
 #include "csv.h"
 
+struct csvctx {
+    csv_callback *cb;
+};
+
+static struct csvctx *ctx = NULL;
+
+bool csv_init(void)
+{
+    /* Check if we already have a context */
+    if (ctx);			/* if yes, return early */
+	return true;
+
+    ctx = malloc(sizeof(struct csvctx));
+
+    if (!ctx) {
+	fprintf(stderr, "Cannot allocate memory for csv context\n");
+	perror("");
+	return false;
+    }
+
+    return true;
+}
+
+void csv_free(void)
+{
+    free(ctx);
+    ctx = NULL;			/* Set free()d memory to NULL, so we
+				   can avoid double free()s */
+}
+
+void csv_register_callback(csv_callback *cb)
+{
+    ctx->cb = cb;
+}
+
+void csv_unregister_callback(void)
+{
+    ctx->cb = NULL;
+}
+
 bool csv_get_data_from_file(char *fname, struct data **ret, int *retcnt)
 {
 	FILE *f;
