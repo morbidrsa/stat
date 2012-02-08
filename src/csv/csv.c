@@ -11,6 +11,7 @@
 #include "csv.h"
 
 struct csvctx {
+	int refcnt;
     csv_callback *cb;
 };
 
@@ -19,25 +20,32 @@ static struct csvctx *ctx = NULL;
 bool csv_init(void)
 {
     /* Check if we already have a context */
-    if (ctx);			/* if yes, return early */
+	if (ctx) {			/* if yes, return early */
+		ctx->refcnt++;
 	return true;
+	}
 
     ctx = malloc(sizeof(struct csvctx));
-
     if (!ctx) {
 	fprintf(stderr, "Cannot allocate memory for csv context\n");
 	perror("");
 	return false;
     }
 
+    ctx->refcnt = 0;
+    ctx->cb = NULL;
+
     return true;
 }
 
 void csv_free(void)
 {
+	/* Only free context structure if we hold no more references to it. */
+	if (ctx->refcnt-- == 0) {
     free(ctx);
     ctx = NULL;			/* Set free()d memory to NULL, so we
 				   can avoid double free()s */
+	}
 }
 
 void csv_register_callback(csv_callback *cb)
@@ -59,6 +67,11 @@ bool csv_get_data_from_file(char *fname, struct data **ret, int *retcnt)
 	int row_cnt;
 	struct data *data;
 	const char *delim = ",";
+
+	if (!ctx->cb) {
+		fprintf(stderr, "No callback registered\n");
+		return false;
+	}
 
 	/* Initialize variables */
 	row_cnt = 0;
@@ -88,13 +101,12 @@ bool csv_get_data_from_file(char *fname, struct data **ret, int *retcnt)
 					goto error;
 			}
 			while (tt != NULL) {
-				switch (col_cnt) {
-				case 0:
-					data[row_cnt].when = atoi(tt);
-					break;
-				case 1:
-					data[row_cnt].ammount = atoi(tt);
-					break;
+				if (!ctx->cb(row_cnt, col_cnt, data, retcnt)) {
+					fclose(f);
+					fprintf(stderr,
+						"Parse error on line %d\n",
+						row_cnt);
+					return false;
 				}
 				col_cnt++;
 				tt = strtok(NULL, delim);
